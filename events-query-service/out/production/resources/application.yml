@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: INFO
+
+spring:
+  data:
+    cassandra:
+      contact-points: cassandra
+      keyspace-name: iot
+      port: 9042
+      schema-action: NONE
