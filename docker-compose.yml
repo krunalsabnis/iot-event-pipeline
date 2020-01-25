@@ -1,0 +1,67 @@
+version: "3.7"
+networks:
+  iot:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.3.0.0/16
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      iot:
+        aliases:
+          - zookeeper.iot.com
+
+  kafka:
+    image: wurstmeister/kafka:2.12-2.3.0
+    links:
+     - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "device-events:1:1"
+    depends_on:
+      - zookeeper
+    networks:
+      iot:
+        aliases:
+          - kafka.iot.com
+ 
+  iot-event-processor:
+    build:
+      context: ./iot-event-processor
+      dockerfile: Dockerfile
+      args:
+        buildno: 1
+    ports:
+      - 8080:8080
+    depends_on:
+      - cassandra
+    environment:
+      - WAIT_HOST=db.iot.com
+      - WAIT_PORT=9042
+    networks:
+      iot:
+        aliases:
+          - processor.iot.com
+
+  cassandra:
+    build:
+      context: ./cassandra
+      dockerfile: Dockerfile
+    hostname: cassandra
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 400M
+      restart_policy:
+        condition: on-failure
+    networks:
+      iot:
+        aliases:
+          - cassandra.iot.com
