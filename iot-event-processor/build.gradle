@@ -1,0 +1,46 @@
+buildscript {
+	ext {
+		springBootVersion = '2.2.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.kru.iot'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	annotationProcessor("org.projectlombok:lombok:1.16.20")
+	implementation 'org.projectlombok:lombok:1.16.20'
+	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra:2.2.3.RELEASE'
+
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.kafka:spring-kafka:2.2.7.RELEASE'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.kafka:spring-kafka-test'
+}
+
+test {
+	useJUnitPlatform()
+}
