@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: INFO
+
+config:
+  cassandra:
+    contact-points: cassandra.iot.com
+    keyspace-name: iot
+    port: 9042
+    events-column: sensorreadings
+    events-table: events

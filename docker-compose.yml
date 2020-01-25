@@ -37,17 +37,34 @@ services:
       dockerfile: Dockerfile
       args:
         buildno: 1
-    ports:
-      - 8080:8080
     depends_on:
       - cassandra
     environment:
-      - WAIT_HOST=db.iot.com
+      - WAIT_HOST=cassandra.iot.com
       - WAIT_PORT=9042
     networks:
       iot:
         aliases:
           - processor.iot.com
+
+  events-query-service:
+    build:
+      context: ./events-query-service
+      dockerfile: Dockerfile
+      args:
+        buildno: 1
+    ports:
+      - 8080:8080
+    depends_on:
+      - cassandra
+    environment:
+      - WAIT_HOST=cassandra.iot.com
+      - WAIT_PORT=9042
+    networks:
+      iot:
+        aliases:
+          - api.iot.com
+
 
   cassandra:
     build:
