@@ -77,9 +77,9 @@ docker-compose up -d
 APIs expects Authentication Token hence pass "Bearer 1234" in Authorization. (As of now Token is hardcoded, but have handles which ideally should do JWT token verification)
 
 
-![Alt text](/images/portainer.png?raw=true "Portainer while running all containers")
-![Alt text](/images/docker-stack.png?raw=true "Docker Stack for Local run")
-![Alt text](/images/diagram.png?raw=true "High Level Architecture")
+![Portainer while all 6 containers are up](/images/portainer.png)
+![Docker Stack for local run](/images/docker-stack.png)
+![High Level Architecture](/images/diagram.png)
 
 
 
