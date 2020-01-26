@@ -56,7 +56,7 @@ Windows:
 
 Execute below commands to build and run whole stack locally
 
-```
+
 // Build event processor
 
 cd iot-event-processor
