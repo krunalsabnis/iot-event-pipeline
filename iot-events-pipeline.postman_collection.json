@@ -1,0 +1,86 @@
+{
+	"variables": [],
+	"info": {
+		"name": "iot-events-pipeline",
+		"_postman_id": "25e544d0-d546-11a1-cb2b-094c2a8ea19a",
+		"description": "Sample Requests for IoT Events from Event Query Service Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Max Humidity from Thermostat",
+			"request": {
+				"url": "http://localhost:8080/api/v1/events",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 1234",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aggregateFunction\": \"max\",\n  \"deviceId\": \"TH_1001\",\n  \"field\": \"humidity\",\n  \"deviceType\": \"THERMOSTAT\",\n  \"fromDate\": \"2020-01-24T20:07:19.045Z\",\n  \"groupBy\": \"deviceType\",\n  \"toDate\": \"2020-01-26T22:07:19.045Z\"\n}"
+				},
+				"description": "Max of Humidity from device of type THERMOSTAT.\nTHERMOSTAT can have two readings, 1. Humidity 2. Temperature"
+			},
+			"response": []
+		},
+		{
+			"name": "Max Temperature  from Thermostat",
+			"request": {
+				"url": "http://localhost:8080/api/v1/events",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 1234",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aggregateFunction\": \"max\",\n  \"deviceId\": \"TH_1001\",\n  \"field\": \"temperature\",\n  \"deviceType\": \"THERMOSTAT\",\n  \"fromDate\": \"2020-01-24T20:07:19.045Z\",\n  \"groupBy\": \"deviceType\",\n  \"toDate\": \"2020-01-26T22:07:19.045Z\"\n}"
+				},
+				"description": "Max of Temperature from device of type THERMOSTAT.\nTHERMOSTAT can have two readings, 1. Humidity 2. Temperature"
+			},
+			"response": []
+		},
+		{
+			"name": "Avg  Fuel  from Car Fuel",
+			"request": {
+				"url": "http://localhost:8080/api/v1/events",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 1234",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aggregateFunction\": \"avg\",\n  \"deviceId\": \"FUEL_1006\",\n  \"field\": \"fuelLevel\",\n  \"deviceType\": \"CAR_FUEL\",\n  \"fromDate\": \"2020-01-24T20:07:19.045Z\",\n  \"groupBy\": \"deviceType\",\n  \"toDate\": \"2020-01-26T22:07:19.045Z\"\n}"
+				},
+				"description": "Average of Fuel Level from device of type CAR_FUEL"
+			},
+			"response": []
+		}
+	]
+}
